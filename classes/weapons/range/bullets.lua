@@ -30,6 +30,7 @@ end
 function Bullet:update(dt)
     self.collider:setLinearVelocity(self.vx, self.vy)
     self.x, self.y = self.collider:getPosition()
+    -- TODO: Cambiar a algo mas dinamico
     if self.x < 0 or self.x > 2000 then
         self.dead = true
         self.collider:destroy()
@@ -37,7 +38,7 @@ function Bullet:update(dt)
 end
 
 function Bullet:inflict_damage(enemy)
-    if enemy then enemy:take_damage(10, {from = self, push_strength = 10}) end
+    if enemy then enemy:take_damage(self.damage, {from = self, push_strength = 10}) end
     self.dead = true
     self.collider:destroy()
 end

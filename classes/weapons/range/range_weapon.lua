@@ -33,7 +33,8 @@ function RangeWeapon:spawn_bullet(mouse_event)
         y = p_pos.y,
         vx = distance.x * self.bullet_speed,
         vy = distance.y * self.bullet_speed,
-        collider = self.world:newRectangleCollider(p_pos.x, p_pos.y, self.width, self.height)
+        collider = self.world:newRectangleCollider(p_pos.x, p_pos.y, self.width, self.height),
+        damage = self.damage
     }
     table.insert(self.bullets, Bullet.new(bullet))
 end
