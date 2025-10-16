@@ -1,0 +1,84 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "map_2.tmx",
+    "expandedProjectPaths": [
+        "Texture",
+        "."
+    ],
+    "file.lastUsedOpenFilter": "All Files (*)",
+    "fileStates": {
+        "": {
+            "scaleInDock": 1
+        },
+        "Texture/Grass.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Texture/Wall.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Texture/Walls.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "map_2.tmx": {
+            "scale": 1.5,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 695.6666666666666,
+                "y": 383
+            }
+        },
+        "map_2.tmx#Grass": {
+            "scaleInDock": 1
+        },
+        "map_2.tmx#TX Tileset Wall": {
+            "scaleInDock": 1
+        },
+        "map_test.tmx": {
+            "scale": 1.5,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 341,
+                "y": 201.66666666666666
+            }
+        },
+        "map_test.tmx#Grass": {
+            "scaleInDock": 1
+        },
+        "map_test.tmx#TX Tileset Wall": {
+            "scaleInEditor": 1
+        },
+        "map_test.tmx#Wall": {
+            "scaleInDock": 1
+        },
+        "map_test.tmx#Walls": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        }
+    },
+    "last.exportedFilePath": "/home/santino/personal/juegos/love2d/maps",
+    "last.imagePath": "/home/santino/personal/juegos/love2d/maps/Texture",
+    "map.height": 30,
+    "map.lastUsedExportFilter": "Lua files (*.lua)",
+    "map.lastUsedFormat": "tmx",
+    "map.width": 120,
+    "openFiles": [
+        "map_2.tmx"
+    ],
+    "project": "map_test.tiled-project",
+    "recentFiles": [
+        "map_2.tmx",
+        "map_test.tmx",
+        "Texture/Wall.tsx",
+        "Texture/Walls.tsx",
+        "Texture/Grass.tsx"
+    ],
+    "tileset.embedInMap": true,
+    "tileset.lastUsedFormat": "tsx"
+}
