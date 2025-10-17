@@ -17,8 +17,8 @@ function AIComponent:update(dt)
     local dx = self.player.x - self.entity.x
     local dy = self.player.y - self.entity.y
 
-    local velocity = Vector(dx, dy):normalized()
-    self.physics:enqueue(MoveCommand.new(velocity))
+    local direction = Vector(dx, dy):normalized()
+    self.entity.state:on_command(MoveCommand.new(direction))
 end
 
 function AIComponent:decreaseSpeed()

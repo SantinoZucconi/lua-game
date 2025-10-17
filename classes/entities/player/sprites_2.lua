@@ -31,7 +31,7 @@ function PlayerSprites.getSprites()
         },
         damage = {
             sprite = sprite_sheet,
-            animation = anim8.newAnimation(grid16("1-3", 9), 0.2),
+            animation = anim8.newAnimation(grid16("1-3", 9), 0.1),
             width = 16,
             height = 16
         },

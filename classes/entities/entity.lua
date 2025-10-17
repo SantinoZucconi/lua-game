@@ -1,4 +1,5 @@
 local PhysicsComponent = require "classes.entities.components.physics_component"
+local AttackComponent = require "classes.entities.components.attack_component"
 local AnimationComponent = require "classes.entities.components.animation_component"
 
 ---@class Entity
@@ -9,6 +10,7 @@ local AnimationComponent = require "classes.entities.components.animation_compon
 ---@field max_invincibility_time number
 ---@field invincibility_time number
 ---@field components table<any>
+---@field state any
 local Entity = {}
 Entity.__index = Entity
 Entity.__name = "Entity"
@@ -30,10 +32,12 @@ function Entity.new(world, sprites, opts)
     self.damaged = false
 
     local physics_component = PhysicsComponent.new(self, world, opts)
+    local attack_component = AttackComponent.new(self, world)
     local animation_component = AnimationComponent.new(self, sprites.getSprites())
 
     self.components = {
         [PhysicsComponent.__name] = physics_component,
+        [AttackComponent.__name] = attack_component,
         [AnimationComponent.__name] = animation_component,
     }
     return self
@@ -42,8 +46,13 @@ end
 function Entity:getPosition()
     return self.x, self.y
 end
-function Entity:addComponent(component)
+
+function Entity:add_component(component)
     self.components[component.__name] = component
+end
+
+function Entity:add_command(command)
+    self.state:add_command(command)
 end
 
 function Entity:take_damage(amount, collision)
@@ -67,17 +76,14 @@ function Entity:destroy()
     end
 end
 
-function Entity:perform_attack()
-    error("No deberia llegar hasta aca")
+function Entity:set_collision_class(class)
+    self.components["PhysicsComponent"]:set_collision_class(class)
 end
 
-function Entity:inflict_damage()
-    error("No deberia llegar hasta aca")
-end
+------------------------------------------------- DRAW ------------------------------------------------------------------
 
 function Entity:draw()
     self:draw_components()
-    if self.weapon and self.weapon.draw then self.weapon:draw() end
 end
 
 function Entity:draw_components()
@@ -86,9 +92,7 @@ function Entity:draw_components()
     end
 end
 
-function Entity:set_collision_class(class)
-    self.components["PhysicsComponent"]:set_collision_class(class)
-end
+------------------------------------------------- UPDATE ----------------------------------------------------------------
 
 function Entity:update(dt)
     if self.damaged and self.invincibility_time > 0 then
@@ -97,7 +101,6 @@ function Entity:update(dt)
         self.damaged = false
         self.invincibility_time = self.max_invincibility_time
     end
-    if self.weapon then self.weapon:update(dt) end
     self:update_components(dt)
 end
 

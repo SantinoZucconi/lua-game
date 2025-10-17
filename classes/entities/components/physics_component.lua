@@ -11,6 +11,7 @@ function PhysicsComponent.new(entity, world, opts)
     self.speed = opts and opts.speed or 200
     self.pushed = self.pushed or nil
     self.velocity = Vector(0, 0)
+    self.valid_commands = { "MoveCommand" }
 
     if not self.collider then
         self.collider = world:newRectangleCollider(self.entity.x, self.entity.y, 16, 16)
@@ -26,18 +27,9 @@ function PhysicsComponent:set_collision_class(class)
     self.collider:setCollisionClass(class)
 end
 
-function PhysicsComponent:enqueue(command)
-    table.insert(self.command_queue, command)
-end
-
-function PhysicsComponent:pop()
-    return table.remove(self.command_queue, 1)
-end
-
 function PhysicsComponent:update(dt)
     self.entity.moving = false
-    local command = self:pop()
-    if command then command:execute(self) end
+
     if self.pushed and self.pushed.current_time < self.pushed.time then
         self.pushed.current_time = self.pushed.current_time + dt
         local ratio = dt / self.pushed.current_time

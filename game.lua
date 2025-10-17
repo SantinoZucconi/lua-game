@@ -100,7 +100,7 @@ function Game:draw()
         for _, e in ipairs(self.entities) do
             e:draw()
         end
-        --self.world:draw() -- see the colliders
+        self.world:draw() -- see the colliders
     self.cam:detach()
     local player_health = string.format("HP: %d", self.player.health)
     love.graphics.print(player_health, 0, 5)

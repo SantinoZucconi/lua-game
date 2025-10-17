@@ -1,4 +1,5 @@
 local MoveCommand = require "classes.entities.commands.move"
+local AttackCommand = require "classes.entities.commands.attack"
 local love = require "love"
 local Vector = require "libs.hump.vector"
 
@@ -10,7 +11,6 @@ function InputComponent.new(entity, camera)
     local self = setmetatable({}, InputComponent)
     self.entity = entity
     self.camera = camera
-    self.physics = self.entity.components["PhysicsComponent"]
     self.__name = InputComponent.__name
     return self
 end
@@ -25,10 +25,10 @@ function InputComponent:update(dt)
         local mouse_x, mouse_y = love.mouse:getPosition()
         local world_x, world_y = self.camera:worldCoords(mouse_x, mouse_y)
         local mouse_event = { x = world_x, y = world_y }
-        self.entity:perform_attack(mouse_event)
+        self.entity.state:on_command(AttackCommand.new(mouse_event))
     end
     local direction = Vector(dv_x, dv_y)
-    self.physics:enqueue(MoveCommand.new(direction))
+    self.entity.state:on_command(MoveCommand.new(direction))
 end
 
 return InputComponent

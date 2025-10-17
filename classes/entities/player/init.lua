@@ -1,7 +1,7 @@
 local InputComponent = require "classes.entities.components.input_component"
 local PlayerSprites = require "classes.entities.player.sprites_2"
-local RangeWeapon = require "classes.weapons.range.range_weapon"
 local Entity = require "classes.entities.entity"
+local IdleState = require "classes.entities.states.idle_state"
 
 ---@class Player
 ---@field x number
@@ -24,20 +24,10 @@ Player.__name = "Player"
 ---@return Entity|Player
 function Player.new(world, sprites, opts, camera)
     local self = setmetatable(Entity.new(world, PlayerSprites, opts), Player)
-    self:addComponent(InputComponent.new(self, camera))
-    self.weapon = RangeWeapon.new(world, self)
-    self.state = nil
+    self:add_component(InputComponent.new(self, camera))
+    self.state = IdleState.new(self)
     self:set_collision_class(self.__name)
     return self
-end
-
-function Player:perform_attack(mouse_event)
-    print("performing attack!")
-    self.weapon:perform_attack(mouse_event)
-end
-
-function Player:inflict_damage(enemy)
-    self.weapon:inflict_damage(enemy)
 end
 
 return Player
